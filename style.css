@@ -51,3 +51,18 @@ tr:hover {
     transition: 0.3s ease-in-out;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #20384b;
+    border-radius: 20px;
+    min-height: 30px;
+}
