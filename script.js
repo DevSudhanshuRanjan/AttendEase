@@ -35,8 +35,8 @@ function addSubjectDetails() {
       100
     ).toFixed(2),
     moresessionsneeded: moresessionsneeded > 0? moresessionsneeded : 0,
-    updatedattended: parseInt(classesTaken.value) + moresessionsneeded,
-    updatedheld: parseInt(sessionsHeld.value) + moresessionsneeded,
+    updatedattended: parseInt(classesTaken.value) + (moresessionsneeded > 0 ? moresessionsneeded : 0),
+    updatedheld: parseInt(sessionsHeld.value) + (moresessionsneeded > 0 ? moresessionsneeded : 0),
   };
   details.push(subjectdisplay);
   subjectName.value = "";
