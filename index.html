@@ -17,7 +17,7 @@
   <body
     class="bg-gray-900 min-h-screen flex flex-col items-center justify-center text-white p-4"
   >
-    <div class="w-full max-w-sm mx-auto">
+    <div class="max-w-full w-full md:w-1/2 lg:w-1/3 mx-auto"">
       <div class="bg-gray-800 rounded-lg shadow-xl p-6">
         <!-- Title -->
         <h1 class="text-3xl font-bold text-center mb-2">
@@ -79,9 +79,11 @@
           >
             <thead class="bg-gray-700">
               <tr>
-                <th class="border border-gray-600 px-4 py-2">Subject</th>
-                <th class="border border-gray-600 px-4 py-2">Classes Taken</th>
-                <th class="border border-gray-600 px-4 py-2">Sessions Held</th>
+                <th class="border border-gray-600 sm:text-large text-xs py-2">Subject</th>
+                <th class="border border-gray-600 sm:text-large text-xs py-2">Classes Taken</th>
+                <th class="border border-gray-600 sm:text-large text-xs py-2">Sessions Held</th>
+                <th class="border border-gray-600 sm:text-large text-xs py-2">Edit</th>
+                <th class="border border-gray-600 sm:text-large text-xs py-2">Delete</th>
               </tr>
             </thead>
             <tbody id="table_body" class="text-center"></tbody>
