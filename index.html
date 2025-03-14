@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AttendEase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-900 min-h-screen flex items-center justify-center text-white p-4">
+    <div class="w-full max-w-sm mx-auto">
+      <div class="bg-gray-800 rounded-lg shadow-xl p-6">
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-center mb-2">AttendEase</h1>
+        <p class="text-gray-400 text-center mb-5">Easy way to get your attendance report!</p>
+
+        <!-- Input Fields -->
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium">Enter Subject Name</label>
+            <input type="text" id="sub_name" placeholder="Subject Name" 
+              class="w-full p-2 mt-1 rounded-md bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none"/>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Enter Number of Classes Taken</label>
+            <input type="text" id="taken" placeholder="Classes Taken" 
+              class="w-full p-2 mt-1 rounded-md bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none"/>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium">Enter Number of Sessions Held</label>
+            <input type="text" id="no_of_sessions" placeholder="Sessions Held" 
+              class="w-full p-2 mt-1 rounded-md bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none"/>
+          </div>
+
+          <button id="add_details" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-md">
+            Add Subject
+          </button>
+        </div>
+
+        <!-- Data Display Table -->
+        <div class="mt-6">
+          <table id="table" class="hidden w-full border-collapse border border-gray-600 mt-4">
+            <thead class="bg-gray-700">
+              <tr>
+                <th class="border border-gray-600 px-4 py-2">Subject</th>
+                <th class="border border-gray-600 px-4 py-2">Classes Taken</th>
+                <th class="border border-gray-600 px-4 py-2">Sessions Held</th>
+              </tr>
+            </thead>
+            <tbody id="table_body" class="text-center"></tbody>
+          </table>
+        </div>
+
+        <!-- Generate PDF Button -->
+        <button id="generatepdf" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-md hidden">
+          Generate PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Include jsPDF and AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.30/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
