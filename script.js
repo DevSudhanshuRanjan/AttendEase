@@ -29,16 +29,16 @@ function addSubjectDetails() {
     alert("Please enter all the details");
     return;
   }
-  
+
   const taken = parseInt(classesTaken.value);
   const held = parseInt(sessionsHeld.value);
-  
+
   if (taken > held) {
     alert("Classes taken cannot be greater than sessions held");
     return;
   }
 
-  const moresessionsneeded = 3*held - 4*taken;
+  const moresessionsneeded = 3 * held - 4 * taken;
 
   const subjectdisplay = {
     subjectName: subjectName.value,
@@ -72,18 +72,24 @@ function addSubjectDetails() {
   showgeneratePDFbtn();
 }
 
-  function displaySubjectDetails() {
+function displaySubjectDetails() {
   tableBody.innerHTML = "";
-  
+
   if (details.length > 0) {
     table.classList.remove("hidden");
-    
+
     details.forEach((detail, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${detail.subjectName}</td>
         <td>${detail.classesTaken}</td>
         <td>${detail.sessionsHeld}</td>
+        <td>
+          <div class="flex justify-center flex-col">
+                <button class="p-1 text-green-500 m-1 text-2xl fontbolder " onclick="moveUp(${index})"><i class="ri-arrow-up-fill"></i></button>
+                <button class="p-1 text-orange-500 m-1 text-2xl font-bolder" onclick="moveDown(${index})"><i class="ri-arrow-down-fill"></i></button>
+          </div>
+        </td>
         <td><button class="p-1 text-yellow-500 m-1" onclick="editSubject(${index})"><i class="ri-pencil-line"></i></button></td>
         <td><button class="p-1 text-red-500 m-1" onclick="deleteSubject(${index})"><i class="ri-delete-bin-line"></i></button></td>
       `;
@@ -92,6 +98,29 @@ function addSubjectDetails() {
   }
 }
 
+function moveUp(index) {
+  if (index > 0) {
+    [details[index], details[index - 1]] = [details[index - 1], details[index]];
+    [subjectsdetails[index], subjectsdetails[index - 1]] = [subjectsdetails[index - 1], subjectsdetails[index]];
+    saveToLocalStorage();
+    displaySubjectDetails();
+  }
+  if (index === 0) {
+    alert("The item cannot be moved up");
+  }
+}
+
+function moveDown(index) {
+  if (index < details.length - 1) {
+    [details[index], details[index + 1]] = [details[index + 1], details[index]];
+    [subjectsdetails[index], subjectsdetails[index + 1]] = [subjectsdetails[index + 1], subjectsdetails[index]];
+    saveToLocalStorage();
+    displaySubjectDetails();
+  }
+  if (index === details.length - 1) {
+    alert("The item cannot be moved down");
+  }
+}
 function editSubject(index) {
   const detail = details[index];
   subjectName.value = detail.subjectName;
@@ -100,7 +129,6 @@ function editSubject(index) {
   addDetails.textContent = "Update Details";
   editIndex = index;
 }
-
 
 function deleteSubject(index) {
   details.splice(index, 1);
@@ -131,7 +159,7 @@ function generatePDF() {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
   doc.text("AttendEase", 80, 15);
-  
+
   // Add underline
   doc.setDrawColor(255, 0, 0);
   doc.line(75, 17, 125, 17);
@@ -146,7 +174,7 @@ function generatePDF() {
       "More Sessions Needed",
       "Updated Attended Sessions",
       "Updated Held Sessions",
-    ]
+    ],
   ];
 
   const data = subjectsdetails.map((subject, index) => [
