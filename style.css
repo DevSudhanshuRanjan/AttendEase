@@ -33,7 +33,6 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal; /* Allow text to wrap */
-  word-break: break-word;
 }
 
 th {

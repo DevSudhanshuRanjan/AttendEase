@@ -80,47 +80,38 @@ function displaySubjectDetails() {
 
     details.forEach((detail, index) => {
       const row = document.createElement("tr");
+      row.classList.add("draggable");
+      row.classList.add("cursor-pointer");
+      row.setAttribute("data-index", index);
       row.innerHTML = `
         <td>${detail.subjectName}</td>
         <td>${detail.classesTaken}</td>
         <td>${detail.sessionsHeld}</td>
-        <td>
-          <div class="flex justify-center flex-col">
-                <button class="p-1 text-green-500 m-1 text-2xl fontbolder " onclick="moveUp(${index})"><i class="ri-arrow-up-fill"></i></button>
-                <button class="p-1 text-orange-500 m-1 text-2xl font-bolder" onclick="moveDown(${index})"><i class="ri-arrow-down-fill"></i></button>
-          </div>
-        </td>
         <td><button class="p-1 text-yellow-500 m-1" onclick="editSubject(${index})"><i class="ri-pencil-line"></i></button></td>
         <td><button class="p-1 text-red-500 m-1" onclick="deleteSubject(${index})"><i class="ri-delete-bin-line"></i></button></td>
       `;
       tableBody.appendChild(row);
     });
+    enableDrag();
+    
   }
 }
 
-function moveUp(index) {
-  if (index > 0) {
-    [details[index], details[index - 1]] = [details[index - 1], details[index]];
-    [subjectsdetails[index], subjectsdetails[index - 1]] = [subjectsdetails[index - 1], subjectsdetails[index]];
-    saveToLocalStorage();
-    displaySubjectDetails();
-  }
-  if (index === 0) {
-    alert("The item cannot be moved up");
-  }
+function enableDrag() {
+  new Sortable(tableBody, {
+    animation: 150,
+    onEnd: () => {
+      const newOrder = [...tableBody.children].map(row => parseInt(row.getAttribute("data-index")));
+
+      details = newOrder.map(index => details[index]);
+      subjectsdetails = newOrder.map(index => subjectsdetails[index]);
+
+      saveToLocalStorage();
+    }
+  });
 }
 
-function moveDown(index) {
-  if (index < details.length - 1) {
-    [details[index], details[index + 1]] = [details[index + 1], details[index]];
-    [subjectsdetails[index], subjectsdetails[index + 1]] = [subjectsdetails[index + 1], subjectsdetails[index]];
-    saveToLocalStorage();
-    displaySubjectDetails();
-  }
-  if (index === details.length - 1) {
-    alert("The item cannot be moved down");
-  }
-}
+
 function editSubject(index) {
   const detail = details[index];
   subjectName.value = detail.subjectName;
